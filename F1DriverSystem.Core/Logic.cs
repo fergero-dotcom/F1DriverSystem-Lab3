@@ -6,11 +6,11 @@ using F1DriverSystem.DataAccessLayer;
 namespace F1DriverSystem.Core
 {
     /// <summary>
-    /// Бизнес-логика системы учёта гонщиков Формулы-1.
+    /// Бизнес-логика системы учёта гонщиков Формулы-1. Реализует интерфейс ILogic.
     /// Класс зависит только от абстракции IRepository, конкретная реализация
     /// внедряется IoC-контейнером (Ninject) через конструктор.
     /// </summary>
-    public class Logic
+    public class Logic : ILogic
     {
         private readonly IRepository<Driver> repository;
 

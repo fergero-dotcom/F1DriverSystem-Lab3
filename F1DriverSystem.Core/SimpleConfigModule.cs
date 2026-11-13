@@ -7,15 +7,16 @@ using Ninject.Modules;
 namespace F1DriverSystem.Core
 {
     /// <summary>
-    /// Модуль конфигурации Ninject: сопоставляет абстракции IRepository
-    /// конкретным реализациям (EntityRepository или DapperRepository)
-    /// в соответствии с настройкой RepositoryProvider в App.config.
-    /// Репозитории регистрируются как Singleton.
+    /// Модуль конфигурации Ninject: сопоставляет абстракции конкретным реализациям.
+    /// IRepository привязывается к EntityRepository или DapperRepository
+    /// в соответствии с настройкой RepositoryProvider в App.config (Singleton),
+    /// ILogic и IRaceLogic — к классам бизнес-логики Logic и RaceLogic.
     /// </summary>
     public class SimpleConfigModule : NinjectModule
     {
         /// <summary>
-        /// Регистрирует зависимости для всех репозиториев.
+        /// Регистрирует зависимости для всех репозиториев
+        /// и классов бизнес-логики.
         /// </summary>
         public override void Load()
         {
@@ -43,6 +44,9 @@ namespace F1DriverSystem.Core
                     .InSingletonScope()
                     .WithConstructorArgument("connectionString", connectionString);
             }
+
+            Bind<ILogic>().To<Logic>().InSingletonScope();
+            Bind<IRaceLogic>().To<RaceLogic>().InSingletonScope();
         }
     }
 }

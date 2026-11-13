@@ -7,11 +7,11 @@ using F1DriverSystem.Models;
 namespace F1DriverSystem.Core
 {
     /// <summary>
-    /// Бизнес-логика каталога этапов (Гран-при).
+    /// Бизнес-логика каталога этапов (Гран-при). Реализует интерфейс IRaceLogic.
     /// Класс зависит только от абстракции IRepository, конкретная реализация
     /// внедряется IoC-контейнером (Ninject) через конструктор.
     /// </summary>
-    public class RaceLogic
+    public class RaceLogic : IRaceLogic
     {
         private readonly IRepository<Race> repository;
 

@@ -7,15 +7,15 @@ namespace F1DriverSystem.ConsoleApp
 {
     /// <summary>
     /// Консольное приложение системы учёта гонщиков Ф1.
-    /// Объект бизнес-логики создаётся через IoC-контейнер Ninject,
-    /// который автоматически внедряет репозиторий в объект BL.
+    /// Приложение зависит только от абстракции ILogic, объект бизнес-логики
+    /// создаётся через IoC-контейнер Ninject.
     /// </summary>
     internal class Program
     {
         private static readonly IKernel ninjectKernel =
             new StandardKernel(new SimpleConfigModule());
 
-        private static readonly Logic logic = ninjectKernel.Get<Logic>();
+        private static readonly ILogic logic = ninjectKernel.Get<ILogic>();
 
         /// <summary>
         /// Точка входа в приложение.

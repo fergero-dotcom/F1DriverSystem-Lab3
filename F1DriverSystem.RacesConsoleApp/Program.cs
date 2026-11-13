@@ -14,7 +14,7 @@ namespace F1DriverSystem.RacesConsoleApp
             try
             {
                 IKernel ninjectKernel = new StandardKernel(new SimpleConfigModule());
-                var logic = ninjectKernel.Get<RaceLogic>();
+                var logic = ninjectKernel.Get<IRaceLogic>();
                 while (true)
                 {
                     Console.WriteLine("\nКАТАЛОГ ГРАН-ПРИ");
