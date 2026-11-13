@@ -7,17 +7,18 @@ using F1DriverSystem.Models;
 namespace F1DriverSystem.DataAccessLayer
 {
     /// <summary>
-    /// 
+    /// Репозиторий на основе Entity Framework 6: CRUD-операции через DbContext.
+    /// Реализация абстракции IRepository, внедряется через DI-контейнер.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Тип доменной сущности.</typeparam>
     public class EntityRepository<T> : IRepository<T> where T : class, IDomainObject
     {
         private readonly string connectionString;
 
         /// <summary>
-        /// 
+        /// Создаёт репозиторий с указанной строкой подключения.
         /// </summary>
-        /// <param name="connectionString"></param>
+        /// <param name="connectionString">Строка подключения к базе данных.</param>
         public EntityRepository(string connectionString)
         {
             EntityMap.For<T>();
@@ -25,9 +26,9 @@ namespace F1DriverSystem.DataAccessLayer
         }
 
         /// <summary>
-        /// 
+        /// Добавляет сущность в базу данных.
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="entity">Добавляемая сущность.</param>
         public void Add(T entity)
         {
             Validate(entity);
@@ -39,10 +40,10 @@ namespace F1DriverSystem.DataAccessLayer
         }
 
         /// <summary>
-        /// 
+        /// Удаляет сущность из базы данных по идентификатору.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Идентификатор сущности.</param>
+        /// <returns>true, если сущность удалена.</returns>
         public bool Delete(int id)
         {
             using (var context = new DBContext(connectionString))
@@ -56,9 +57,9 @@ namespace F1DriverSystem.DataAccessLayer
         }
 
         /// <summary>
-        /// 
+        /// Возвращает все сущности из базы данных, отсортированные по идентификатору.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Список всех сущностей.</returns>
         public List<T> ReadAll()
         {
             using (var context = new DBContext(connectionString))
@@ -66,10 +67,10 @@ namespace F1DriverSystem.DataAccessLayer
         }
 
         /// <summary>
-        /// 
+        /// Находит сущность в базе данных по идентификатору.
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
+        /// <param name="id">Идентификатор сущности.</param>
+        /// <returns>Сущность или null, если она не найдена.</returns>
         public T ReadById(int id)
         {
             using (var context = new DBContext(connectionString))
@@ -77,10 +78,10 @@ namespace F1DriverSystem.DataAccessLayer
         }
 
         /// <summary>
-        /// 
+        /// Обновляет сущность в базе данных.
         /// </summary>
-        /// <param name="entity"></param>
-        /// <returns></returns>
+        /// <param name="entity">Сущность с обновлёнными данными.</param>
+        /// <returns>true, если сущность обновлена.</returns>
         public bool Update(T entity)
         {
             Validate(entity);
@@ -95,9 +96,9 @@ namespace F1DriverSystem.DataAccessLayer
         }
 
         /// <summary>
-        /// 
+        /// Проверяет корректность сущности перед записью в базу данных.
         /// </summary>
-        /// <param name="entity"></param>
+        /// <param name="entity">Проверяемая сущность.</param>
         private static void Validate(T entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));

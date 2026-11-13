@@ -5,34 +5,34 @@ using F1DriverSystem.Models;
 namespace F1DriverSystem.DataAccessLayer
 {
     /// <summary>
-    /// 
+    /// Отображение сущности на таблицу базы данных для SQL-запросов Dapper.
     /// </summary>
     internal sealed class EntityMap
     {
         /// <summary>
-        /// 
+        /// Имя таблицы.
         /// </summary>
         public string Table { get; private set; }
         /// <summary>
-        /// 
+        /// Список столбцов для чтения и вставки.
         /// </summary>
         public string Columns { get; private set; }
         /// <summary>
-        /// 
+        /// Список параметров для команды INSERT.
         /// </summary>
         public string Parameters { get; private set; }
         /// <summary>
-        /// 
+        /// Список присваиваний для команды UPDATE.
         /// </summary>
         public string Assignments { get; private set; }
 
         /// <summary>
-        /// 
+        /// Закрытый конструктор отображения.
         /// </summary>
-        /// <param name="table"></param>
-        /// <param name="columns"></param>
-        /// <param name="parameters"></param>
-        /// <param name="assignments"></param>
+        /// <param name="table">Имя таблицы.</param>
+        /// <param name="columns">Список столбцов.</param>
+        /// <param name="parameters">Список параметров.</param>
+        /// <param name="assignments">Список присваиваний.</param>
         private EntityMap(string table, string columns, string parameters, string assignments)
         {
             Table = table;
@@ -42,10 +42,10 @@ namespace F1DriverSystem.DataAccessLayer
         }
 
         /// <summary>
-        /// 
+        /// Возвращает отображение для указанного типа сущности.
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <returns></returns>
+        /// <typeparam name="T">Тип доменной сущности.</typeparam>
+        /// <returns>Отображение сущности на таблицу базы данных.</returns>
         public static EntityMap For<T>()
         {
             if (typeof(T) == typeof(Driver))

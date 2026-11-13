@@ -5,26 +5,27 @@ using F1DriverSystem.Core;
 namespace F1DriverSystem.WinFormsApp
 {
     /// <summary>
-    /// 
+    /// Диалоговая форма добавления и редактирования гонщика.
     /// </summary>
     public partial class EditDriverForm : Form
     {
         /// <summary>
-        /// 
+        /// Введённое имя гонщика.
         /// </summary>
         public string DriverName { get; private set; }
         /// <summary>
-        /// 
+        /// Введённое название команды.
         /// </summary>
         public string Team { get; private set; }
         /// <summary>
-        /// 
+        /// Введённое количество очков.
         /// </summary>
         public int Points { get; private set; }
 
         /// <summary>
-        /// 
+        /// Создаёт форму; при редактировании заполняет поля данными гонщика.
         /// </summary>
+        /// <param name="driver">Гонщик для редактирования или null для добавления нового.</param>
         public EditDriverForm(Driver driver)
         {
             InitializeComponent();
@@ -39,7 +40,7 @@ namespace F1DriverSystem.WinFormsApp
         }
 
         /// <summary>
-        /// 
+        /// Обработчик кнопки сохранения: проверяет введённые данные и закрывает форму.
         /// </summary>
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -58,7 +59,7 @@ namespace F1DriverSystem.WinFormsApp
         }
 
         /// <summary>
-        /// 
+        /// Обработчик кнопки отмены: закрывает форму без сохранения.
         /// </summary>
         private void btnCancel_Click(object sender, EventArgs e)
         {

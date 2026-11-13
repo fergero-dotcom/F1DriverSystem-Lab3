@@ -7,9 +7,9 @@ using F1DriverSystem.DataAccessLayer;
 namespace F1DriverSystem.Tests
 {
     /// <summary>
-    /// 
+    /// Репозиторий в памяти для юнит-тестов: реализует IRepository без базы данных.
     /// </summary>
-    /// <typeparam name="T"></typeparam>
+    /// <typeparam name="T">Тип доменной сущности.</typeparam>
     internal sealed class MemoryRepository<T> : IRepository<T> where T : class, IDomainObject, new()
     {
         private readonly Dictionary<int, T> data = new Dictionary<int, T>();

@@ -7,12 +7,12 @@ using F1DriverSystem.Models;
 namespace F1DriverSystem.DataAccessLayer
 {
     /// <summary>
-    /// 
+    /// Конфигурация Entity Framework: регистрирует провайдер SQL Server.
     /// </summary>
     public class SqlServerConfiguration : DbConfiguration
     {
         /// <summary>
-        /// 
+        /// Настраивает использование провайдера System.Data.SqlClient.
         /// </summary>
         public SqlServerConfiguration()
         {
@@ -21,7 +21,7 @@ namespace F1DriverSystem.DataAccessLayer
     }
 
     /// <summary>
-    /// 
+    /// Контекст Entity Framework: отображает сущности Driver и Race на таблицы базы данных.
     /// </summary>
     [DbConfigurationType(typeof(SqlServerConfiguration))]
     public class DBContext : DbContext
@@ -32,24 +32,24 @@ namespace F1DriverSystem.DataAccessLayer
         }
 
         /// <summary>
-        /// 
+        /// Создаёт контекст с указанной строкой подключения.
         /// </summary>
-        /// <param name="connectionString"></param>
+        /// <param name="connectionString">Строка подключения к базе данных.</param>
         public DBContext(string connectionString) : base(connectionString) { }
 
         /// <summary>
-        /// 
+        /// Набор сущностей гонщиков (таблица Drivers).
         /// </summary>
         public DbSet<Driver> Drivers { get; set; }
         /// <summary>
-        /// 
+        /// Набор сущностей этапов (таблица Races).
         /// </summary>
         public DbSet<Race> Races { get; set; }
 
         /// <summary>
-        /// 
+        /// Настраивает отображение сущностей на таблицы базы данных.
         /// </summary>
-        /// <param name="modelBuilder"></param>
+        /// <param name="modelBuilder">Построитель модели Entity Framework.</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Driver>().ToTable("Drivers", "dbo").HasKey(x => x.Id);

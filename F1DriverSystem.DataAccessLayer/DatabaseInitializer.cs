@@ -7,7 +7,7 @@ using System.IO;
 namespace F1DriverSystem.DataAccessLayer
 {
     /// <summary>
-    /// 
+    /// Инициализатор базы данных: создаёт базу и схему таблиц при первом обращении.
     /// </summary>
     public static class DatabaseInitializer
     {
@@ -15,9 +15,10 @@ namespace F1DriverSystem.DataAccessLayer
         private static readonly HashSet<string> Initialized = new HashSet<string>();
 
         /// <summary>
-        /// 
+        /// Гарантирует существование базы данных и таблиц. Потокобезопасен;
+        /// повторные вызовы с той же строкой подключения игнорируются.
         /// </summary>
-        /// <param name="connectionString"></param>
+        /// <param name="connectionString">Строка подключения к базе данных.</param>
         public static void EnsureCreated(string connectionString)
         {
             lock (Sync)
@@ -61,9 +62,9 @@ namespace F1DriverSystem.DataAccessLayer
         }
 
         /// <summary>
-        /// 
+        /// Создаёт базу данных на сервере, если она отсутствует.
         /// </summary>
-        /// <param name="builder"></param>
+        /// <param name="builder">Построитель строки подключения с именем базы данных.</param>
         private static void CreateDatabase(SqlConnectionStringBuilder builder)
         {
             string databaseName = builder.InitialCatalog;

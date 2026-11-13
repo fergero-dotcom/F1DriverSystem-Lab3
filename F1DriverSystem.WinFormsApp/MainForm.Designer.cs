@@ -3,14 +3,14 @@ namespace F1DriverSystem.WinFormsApp
     partial class MainForm
     {
         /// <summary>
-        /// 
+        /// Контейнер компонентов формы.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 
+        /// Освобождает используемые формой ресурсы.
         /// </summary>
-        /// <param name="disposing"></param>
+        /// <param name="disposing">true, если необходимо освободить управляемые ресурсы.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
