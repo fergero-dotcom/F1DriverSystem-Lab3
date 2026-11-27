@@ -63,7 +63,7 @@ namespace F1DriverSystem.DataAccessLayer
         public List<T> ReadAll()
         {
             using (var context = new DBContext(connectionString))
-                return context.Set<T>().AsNoTracking().ToList().OrderBy(x => x.ID).ToList();
+                return context.Set<T>().AsNoTracking().ToList().OrderBy(x => x.Id).ToList();
         }
 
         /// <summary>
@@ -87,7 +87,7 @@ namespace F1DriverSystem.DataAccessLayer
             Validate(entity);
             using (var context = new DBContext(connectionString))
             {
-                T stored = context.Set<T>().Find(entity.ID);
+                T stored = context.Set<T>().Find(entity.Id);
                 if (stored == null) return false;
                 context.Entry(stored).CurrentValues.SetValues(entity);
                 context.SaveChanges();
@@ -102,7 +102,7 @@ namespace F1DriverSystem.DataAccessLayer
         private static void Validate(T entity)
         {
             if (entity == null) throw new ArgumentNullException(nameof(entity));
-            if (entity.ID <= 0) throw new ArgumentOutOfRangeException(nameof(entity), "ID должен быть положительным.");
+            if (entity.Id <= 0) throw new ArgumentOutOfRangeException(nameof(entity), "ID должен быть положительным.");
         }
     }
 }

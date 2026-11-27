@@ -1,5 +1,4 @@
 using System;
-using F1DriverSystem.Core;
 using F1DriverSystem.Models;
 
 namespace F1DriverSystem.DataAccessLayer
