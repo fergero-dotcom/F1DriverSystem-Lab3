@@ -5,8 +5,7 @@ namespace F1DriverSystem.DataAccessLayer
 {
     /// <summary>
     /// Абстракция репозитория: контракт CRUD-операций над доменными сущностями.
-    /// Конкретная реализация (EntityRepository или DapperRepository)
-    /// внедряется в бизнес-логику через DI-контейнер.
+    /// Не зависит от способа хранения данных.
     /// </summary>
     /// <typeparam name="T">Тип доменной сущности.</typeparam>
     public interface IRepository<T> where T : class, IDomainObject
