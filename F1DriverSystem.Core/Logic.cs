@@ -12,7 +12,7 @@ namespace F1DriverSystem.Core
     /// </summary>
     public class Logic : ILogic
     {
-        private static Logic? instance;
+        private static Logic instance;
         private static readonly object lockObject = new object();
 
         private readonly IRepository<Driver> repository;

@@ -13,7 +13,7 @@ namespace F1DriverSystem.Core
     /// </summary>
     public class RaceLogic : IRaceLogic
     {
-        private static RaceLogic? instance;
+        private static RaceLogic instance;
         private static readonly object lockObject = new object();
 
         private readonly IRepository<Race> repository;
