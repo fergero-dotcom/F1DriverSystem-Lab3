@@ -9,44 +9,19 @@ namespace F1DriverSystem.Core
     /// <summary>
     /// Бизнес-логика каталога этапов (Гран-при). Реализует интерфейс IRaceLogic.
     /// Класс зависит только от абстракции IRepository, конкретная реализация
-    /// передаётся при первом получении singleton-экземпляра.
+    /// внедряется IoC-контейнером (Ninject) через конструктор.
     /// </summary>
     public class RaceLogic : IRaceLogic
     {
-        private static RaceLogic instance;
-        private static readonly object lockObject = new object();
-
         private readonly IRepository<Race> repository;
 
         /// <summary>
         /// Создаёт объект бизнес-логики с внедрённым репозиторием.
         /// </summary>
-        /// <param name="repository">Репозиторий этапов.</param>
-        private RaceLogic(IRepository<Race> repository)
+        /// <param name="repository">Репозиторий этапов, внедряемый DI-контейнером.</param>
+        public RaceLogic(IRepository<Race> repository)
         {
             this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
-        }
-
-        /// <summary>
-        /// Возвращает единственный экземпляр RaceLogic.
-        /// При первом обращении передаётся репозиторий этапов.
-        /// </summary>
-        /// <param name="repository">Репозиторий этапов.</param>
-        /// <returns>Единственный экземпляр RaceLogic.</returns>
-        public static RaceLogic GetInstance(IRepository<Race> repository)
-        {
-            if (instance == null)
-            {
-                lock (lockObject)
-                {
-                    if (instance == null)
-                    {
-                        instance = new RaceLogic(repository);
-                    }
-                }
-            }
-
-            return instance;
         }
 
         /// <summary>

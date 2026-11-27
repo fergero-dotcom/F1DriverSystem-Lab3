@@ -2,7 +2,6 @@ using System;
 using System.Configuration;
 using F1DriverSystem.DataAccessLayer;
 using F1DriverSystem.Models;
-using Ninject;
 using Ninject.Modules;
 
 namespace F1DriverSystem.Core
@@ -28,12 +27,8 @@ namespace F1DriverSystem.Core
             Bind<IRepository<Race>>()
                 .ToMethod(context => RepositoryFactory.Create<Race>(provider, connectionString))
                 .InSingletonScope();
-            Bind<ILogic>()
-                .ToMethod(context => Logic.GetInstance(context.Kernel.Get<IRepository<Driver>>()))
-                .InSingletonScope();
-            Bind<IRaceLogic>()
-                .ToMethod(context => RaceLogic.GetInstance(context.Kernel.Get<IRepository<Race>>()))
-                .InSingletonScope();
+            Bind<ILogic>().To<Logic>().InSingletonScope();
+            Bind<IRaceLogic>().To<RaceLogic>().InSingletonScope();
         }
     }
 }
