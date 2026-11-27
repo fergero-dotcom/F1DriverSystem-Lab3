@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.SqlServer;
+using F1DriverSystem.Core;
 using F1DriverSystem.Models;
 
 namespace F1DriverSystem.DataAccessLayer
