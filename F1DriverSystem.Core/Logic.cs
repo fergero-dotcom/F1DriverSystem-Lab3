@@ -8,19 +8,44 @@ namespace F1DriverSystem.Core
     /// <summary>
     /// Бизнес-логика системы учёта гонщиков Формулы-1. Реализует интерфейс ILogic.
     /// Класс зависит только от абстракции IRepository, конкретная реализация
-    /// внедряется IoC-контейнером (Ninject) через конструктор.
+    /// передаётся при первом получении singleton-экземпляра.
     /// </summary>
     public class Logic : ILogic
     {
+        private static Logic? instance;
+        private static readonly object lockObject = new object();
+
         private readonly IRepository<Driver> repository;
 
         /// <summary>
         /// Создаёт объект бизнес-логики с внедрённым репозиторием.
         /// </summary>
-        /// <param name="repository">Репозиторий гонщиков, внедряемый DI-контейнером.</param>
-        public Logic(IRepository<Driver> repository)
+        /// <param name="repository">Репозиторий гонщиков.</param>
+        private Logic(IRepository<Driver> repository)
         {
             this.repository = repository ?? throw new ArgumentNullException(nameof(repository));
+        }
+
+        /// <summary>
+        /// Возвращает единственный экземпляр Logic.
+        /// При первом обращении передаётся репозиторий гонщиков.
+        /// </summary>
+        /// <param name="repository">Репозиторий гонщиков.</param>
+        /// <returns>Единственный экземпляр Logic.</returns>
+        public static Logic GetInstance(IRepository<Driver> repository)
+        {
+            if (instance == null)
+            {
+                lock (lockObject)
+                {
+                    if (instance == null)
+                    {
+                        instance = new Logic(repository);
+                    }
+                }
+            }
+
+            return instance;
         }
 
         /// <summary>
